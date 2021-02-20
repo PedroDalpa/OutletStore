@@ -1,7 +1,8 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn
+  CreateDateColumn, ManyToOne, JoinColumn, OneToMany
 } from 'typeorm';
+import Product from './Product';
 
 import User from './User';
 
@@ -23,4 +24,10 @@ export default class ProductBrand {
   @ManyToOne(() => User, tenant => tenant.productBrands)
   @JoinColumn({ name: 'user_id' })
   user:User
+
+  @OneToMany(() => Product, product => product.productBrand, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_brand_id' })
+  products: Product[]
 }

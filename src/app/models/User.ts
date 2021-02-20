@@ -2,6 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, Cre
 import bcrypt from 'bcryptjs';
 import Tenant from './Tenant';
 import ProductBrand from './ProductBrand';
+import Product from './Product';
+import ProductProvider from './ProductProvider';
 
 @Entity('user')
 export default class User {
@@ -46,4 +48,16 @@ export default class User {
   })
   @JoinColumn({ name: 'user_id' })
   productBrands: ProductBrand[]
+
+  @OneToMany(() => Product, product => product.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  products: Product[]
+
+  @OneToMany(() => ProductProvider, productProvider => productProvider.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  productProviders: ProductProvider[]
 }

@@ -7,6 +7,8 @@ import UserController from './app/controllers/UserController';
 import AuthController from './app/controllers/AuthController';
 import TenantController from '@controllers/TenantController';
 import ProductBrandController from '@controllers/ProductBrandController';
+import ProductController from '@controllers/ProductController';
+import ProductProviderController from '@controllers/ProductProviderController';
 
 const routes = Router();
 
@@ -18,5 +20,9 @@ routes.get('/users', authMiddleware, authAccessLevelMiddleware([1, 2]), UserCont
 routes.post('/tenant', TenantController.create);
 
 routes.post('/product/brand', ProductBrandController.create);
+
+routes.post('/product', ProductController.create);
+
+routes.post('/product/provider', ProductProviderController.create);
 
 export default routes;
