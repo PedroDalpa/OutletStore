@@ -9,6 +9,7 @@ import TenantController from '@controllers/TenantController';
 import ProductBrandController from '@controllers/ProductBrandController';
 import ProductController from '@controllers/ProductController';
 import ProductProviderController from '@controllers/ProductProviderController';
+import ProductColorController from '@controllers/ProductColorController';
 
 const routes = Router();
 
@@ -24,5 +25,7 @@ routes.post('/product/brand', ProductBrandController.create);
 routes.post('/product', ProductController.create);
 
 routes.post('/product/provider', ProductProviderController.create);
+
+routes.post('/product/color', ProductColorController.create);
 
 export default routes;

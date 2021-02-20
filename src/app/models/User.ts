@@ -4,6 +4,7 @@ import Tenant from './Tenant';
 import ProductBrand from './ProductBrand';
 import Product from './Product';
 import ProductProvider from './ProductProvider';
+import ProductColor from './ProductColor';
 
 @Entity('user')
 export default class User {
@@ -60,4 +61,10 @@ export default class User {
   })
   @JoinColumn({ name: 'user_id' })
   productProviders: ProductProvider[]
+
+  @OneToMany(() => ProductColor, productColor => productColor.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  productColors: ProductColor[]
 }
