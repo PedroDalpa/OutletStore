@@ -1,7 +1,8 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn
+  CreateDateColumn, ManyToOne, JoinColumn, OneToMany
 } from 'typeorm';
+import ProductPurchase from './ProductPurchase';
 
 import User from './User';
 
@@ -24,9 +25,9 @@ export default class ProductColor {
   @JoinColumn({ name: 'user_id' })
   user:User
 
-  // @OneToMany(() => Product, product => product.productBrand, {
-  //   cascade: ['insert', 'update']
-  // })
-  // @JoinColumn({ name: 'product_brand_id' })
-  // products: Product[]
+  @OneToMany(() => ProductPurchase, productPurchase => productPurchase.productColor, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_provider_id' })
+  productPurchases: ProductPurchase[]
 }

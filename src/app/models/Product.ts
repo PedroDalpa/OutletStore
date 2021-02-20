@@ -4,6 +4,7 @@ import {
 } from 'typeorm';
 import ProductBrand from './ProductBrand';
 import ProductProviderProduct from './ProductProviderProduct';
+import ProductPurchase from './ProductPurchase';
 
 import User from './User';
 
@@ -36,4 +37,11 @@ export default class Product {
   })
   @JoinColumn({ name: 'product_id' })
   productProviderProducts: ProductProviderProduct[]
+
+  @OneToMany(() => ProductPurchase, productPurchase =>
+    productPurchase.product, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_id' })
+  productPurchases: ProductPurchase[]
 }
