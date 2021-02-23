@@ -20,10 +20,10 @@ export default class ProductProviderProduct {
   @ManyToOne(() => Product, product =>
     product.productProviderProducts)
   @JoinColumn({ name: 'product_id' })
-  product: Product;
+  product: string;
 
   @ManyToOne(() => ProductProvider, productProvider =>
     productProvider.productProviderProducts)
   @JoinColumn({ name: 'product_provider_id' })
-  productProvider: ProductProvider;
+  productProvider: string;
 }

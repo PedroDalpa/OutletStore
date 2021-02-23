@@ -30,18 +30,18 @@ export default class ProductProvider {
 
   @ManyToOne(() => User, user => user.productProviders)
   @JoinColumn({ name: 'user_id' })
-  user:User
+  user:string
 
   @OneToMany(() => ProductProviderProduct, productProviderProduct =>
     productProviderProduct.productProvider, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'product_provider_id' })
-  productProviderProducts: ProductProviderProduct[]
+  productProviderProducts: string[]
 
   @OneToMany(() => ProductPurchase, productPurchase => productPurchase.productProvider, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'product_provider_id' })
-  productPurchases: ProductPurchase[]
+  productPurchases: string[]
 }

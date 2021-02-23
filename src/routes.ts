@@ -11,6 +11,8 @@ import ProductController from '@controllers/ProductController';
 import ProductProviderController from '@controllers/ProductProviderController';
 import ProductColorController from '@controllers/ProductColorController';
 import ProductPurchaseController from '@controllers/ProductPurchaseController';
+import ProductCategoryController from '@controllers/ProductCategoryController';
+import ProductSubCategoryController from '@controllers/ProductSubCategoryController';
 
 const routes = Router();
 
@@ -30,5 +32,9 @@ routes.post('/product/provider', ProductProviderController.create);
 routes.post('/product/color', ProductColorController.create);
 
 routes.post('/product/purchase', ProductPurchaseController.create);
+
+routes.post('/product/category', ProductCategoryController.create);
+
+routes.post('/product/sub/category', ProductSubCategoryController.create);
 
 export default routes;

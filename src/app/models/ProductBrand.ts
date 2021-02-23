@@ -21,13 +21,13 @@ export default class ProductBrand {
   @Column('boolean', { nullable: false })
   active: boolean;
 
-  @ManyToOne(() => User, tenant => tenant.productBrands)
+  @ManyToOne(() => User, user => user.productBrands)
   @JoinColumn({ name: 'user_id' })
-  user:User
+  user:string
 
   @OneToMany(() => Product, product => product.productBrand, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'product_brand_id' })
-  products: Product[]
+  products: string[]
 }

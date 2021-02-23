@@ -34,5 +34,5 @@ export default class Tenant {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'tenant_id' })
-  users: User[]
+  users: string[]
 }

@@ -1,13 +1,13 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn, OneToMany
+  CreateDateColumn, ManyToOne, JoinColumn
 } from 'typeorm';
-import ProductPurchase from './ProductPurchase';
+import ProductCategory from './ProductCategory';
 
 import User from './User';
 
-@Entity('product_color')
-export default class ProductColor {
+@Entity('product_sub_category')
+export default class ProductSubCategory {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -21,13 +21,11 @@ export default class ProductColor {
   @Column('boolean', { nullable: false })
   active: boolean;
 
-  @ManyToOne(() => User, user => user.productColors)
+  @ManyToOne(() => User, user => user.productSubCategorys)
   @JoinColumn({ name: 'user_id' })
   user:string
 
-  @OneToMany(() => ProductPurchase, productPurchase => productPurchase.productColor, {
-    cascade: ['insert', 'update']
-  })
-  @JoinColumn({ name: 'product_provider_id' })
-  productPurchases: string[]
+  @ManyToOne(() => ProductCategory, productCategory => productCategory.productSubCategorys)
+  @JoinColumn({ name: 'product_category_id' })
+  productCategory:string
 }

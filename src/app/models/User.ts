@@ -6,6 +6,8 @@ import Product from './Product';
 import ProductProvider from './ProductProvider';
 import ProductColor from './ProductColor';
 import ProductPurchase from './ProductPurchase';
+import ProductCategory from './ProductCategory';
+import ProductSubCategory from './ProductSubCategory';
 
 @Entity('user')
 export default class User {
@@ -37,7 +39,7 @@ export default class User {
 
   @ManyToOne(() => Tenant, tenant => tenant.users)
   @JoinColumn({ name: 'tenant_id' })
-  tenant:Tenant
+  tenant:string
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -49,29 +51,41 @@ export default class User {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productBrands: ProductBrand[]
+  productBrands: string[]
 
   @OneToMany(() => Product, product => product.user, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  products: Product[]
+  products: string[]
 
   @OneToMany(() => ProductProvider, productProvider => productProvider.user, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productProviders: ProductProvider[]
+  productProviders: string[]
 
   @OneToMany(() => ProductColor, productColor => productColor.user, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productColors: ProductColor[]
+  productColors: string[]
 
   @OneToMany(() => ProductPurchase, productPurchase => productPurchase.user, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productPurchases: ProductPurchase[]
+  productPurchases: string[]
+
+  @OneToMany(() => ProductCategory, productCategory => productCategory.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  productCategorys: string[]
+
+  @OneToMany(() => ProductSubCategory, productSubCategory => productSubCategory.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  productSubCategorys: string[]
 }
