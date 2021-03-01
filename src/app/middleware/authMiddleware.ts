@@ -26,7 +26,9 @@ const authMiddleware = (
     request.userId = id;
 
     return next();
-  } catch {
+  } catch (error) {
+    console.error(error);
+
     return response.sendStatus(401);
   }
 };

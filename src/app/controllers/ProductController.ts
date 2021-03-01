@@ -20,7 +20,6 @@ export default {
     if (productExists) {
       return response.sendStatus(400);
     }
-    console.log(productProviders);
 
     try {
       const product = productRepository.create({

@@ -19,11 +19,12 @@ const routes = Router();
 routes.post('/auth', AuthController.authenticate);
 
 routes.post('/users', UserController.create);
-routes.get('/users', authMiddleware, authAccessLevelMiddleware([1, 2]), UserController.show);
-
+routes.use(authMiddleware);
+routes.get('/users', authAccessLevelMiddleware([1, 2]), UserController.show);
 routes.post('/tenant', TenantController.create);
 
 routes.post('/product/brand', ProductBrandController.create);
+routes.get('/product/brand', ProductBrandController.show);
 
 routes.post('/product', ProductController.create);
 

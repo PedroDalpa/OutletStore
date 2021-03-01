@@ -29,7 +29,6 @@ export default {
     const token = jwt.sign(payload, 'secret', { expiresIn: '1d' });
 
     return response.json({
-      user,
       token
     });
   }

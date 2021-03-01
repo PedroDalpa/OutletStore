@@ -3,6 +3,8 @@ import { getRepository } from 'typeorm';
 
 import ProductBrand from '@models/ProductBrand';
 
+import returnUserIdFromToken from '../middleware/desetruckTokenMiddleware';
+
 export default {
   async show(request: Request, response: Response) {
     const productBrandRepository = getRepository(ProductBrand);
@@ -13,7 +15,10 @@ export default {
   },
   async create(request: Request, response: Response) {
     const productBrandRepository = getRepository(ProductBrand);
-    const { name, userId } = request.body;
+    const { name } = request.body;
+    const { authorization } = request.headers;
+
+    const id = returnUserIdFromToken(authorization);
 
     const productBrandExits = await productBrandRepository.findOne({ where: { name } });
 
@@ -23,7 +28,7 @@ export default {
     try {
       const productBrand = productBrandRepository.create({
         name,
-        user: userId
+        user: id
       });
 
       await productBrandRepository.save(productBrand);
