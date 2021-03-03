@@ -19,7 +19,9 @@ const routes = Router();
 routes.post('/auth', AuthController.authenticate);
 
 routes.post('/users', UserController.create);
+
 routes.use(authMiddleware);
+
 routes.get('/users', authAccessLevelMiddleware([1, 2]), UserController.show);
 routes.post('/tenant', TenantController.create);
 
@@ -35,6 +37,7 @@ routes.post('/product/color', ProductColorController.create);
 routes.post('/product/purchase', ProductPurchaseController.create);
 
 routes.post('/product/category', ProductCategoryController.create);
+routes.get('/product/category', ProductCategoryController.show);
 
 routes.post('/product/sub/category', ProductSubCategoryController.create);
 

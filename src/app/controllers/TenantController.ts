@@ -7,7 +7,7 @@ export default {
   async show(request: Request, response: Response) {
     const tenantRepository = getRepository(Tenant);
 
-    const factorySectors = await tenantRepository.find();
+    const factorySectors = await tenantRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(factorySectors);
   },

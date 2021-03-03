@@ -7,7 +7,7 @@ export default {
   async show(request: Request, response: Response) {
     const productSubCategoryRepository = getRepository(ProductSubCategory);
 
-    const productSubCategorys = await productSubCategoryRepository.find();
+    const productSubCategorys = await productSubCategoryRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(productSubCategorys);
   },

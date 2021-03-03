@@ -7,7 +7,7 @@ export default {
   async show(request: Request, response: Response) {
     const productRepository = getRepository(Product);
 
-    const products = await productRepository.find();
+    const products = await productRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(products);
   },

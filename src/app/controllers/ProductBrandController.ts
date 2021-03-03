@@ -9,7 +9,7 @@ export default {
   async show(request: Request, response: Response) {
     const productBrandRepository = getRepository(ProductBrand);
 
-    const productBrands = await productBrandRepository.find();
+    const productBrands = await productBrandRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(productBrands);
   },

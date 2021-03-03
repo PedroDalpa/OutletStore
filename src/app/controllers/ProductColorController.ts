@@ -7,7 +7,7 @@ export default {
   async show(request: Request, response: Response) {
     const productColorRepository = getRepository(ProductColor);
 
-    const productColors = await productColorRepository.find();
+    const productColors = await productColorRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(productColors);
   },

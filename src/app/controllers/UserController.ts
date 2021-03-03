@@ -7,7 +7,7 @@ export default {
   async show(request: Request, response: Response) {
     const usersRepository = getRepository(User);
 
-    const users = await usersRepository.find();
+    const users = await usersRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(userView.renderMany(users));
   },

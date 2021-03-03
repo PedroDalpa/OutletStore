@@ -19,7 +19,7 @@ export default {
   async show(request: Request, response: Response) {
     const productPurchaseRepository = getRepository(ProductPurchase);
 
-    const productPurchases = await productPurchaseRepository.find();
+    const productPurchases = await productPurchaseRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(productPurchases);
   },
