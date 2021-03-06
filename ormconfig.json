@@ -6,10 +6,10 @@
   "password": "mbrbi6y5en3ck1na",
   "database": "outlet",
   "entities": [
-    "./dist/app/models/*.ts"
+    "./dist/app/models/*.js"
   ],
   "migrations": [
-    "./dist/database/migrations/*.ts"
+    "./dist/database/migrations/*.js"
   ],
   "cli": {
     "migrationsDir": "./dist/database/migrations"
