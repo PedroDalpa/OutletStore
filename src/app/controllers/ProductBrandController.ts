@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 
 import ProductBrand from '@models/ProductBrand';
 
-import returnUserIdFromToken from '../middleware/desetruckTokenMiddleware';
+import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 export default {
   async show(request: Request, response: Response) {
@@ -20,10 +20,10 @@ export default {
 
     const id = returnUserIdFromToken(authorization);
 
-    const productBrandExits = await productBrandRepository.findOne({ where: { name } });
+    const productBrandExits = await productBrandRepository.findOne({ where: [{ name, active: '1' }] });
 
     if (productBrandExits) {
-      return response.sendStatus(400);
+      return response.status(400).json({ message: 'Já existe uma marca com esse nome' });
     }
     try {
       const productBrand = productBrandRepository.create({

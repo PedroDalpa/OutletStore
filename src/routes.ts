@@ -40,5 +40,6 @@ routes.post('/product/category', ProductCategoryController.create);
 routes.get('/product/category', ProductCategoryController.show);
 
 routes.post('/product/sub/category', ProductSubCategoryController.create);
+routes.get('/product/sub/category', ProductSubCategoryController.show);
 
 export default routes;

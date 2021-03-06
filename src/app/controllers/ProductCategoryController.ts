@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import ProductCategory from '@models/ProductCategory';
-import returnUserIdFromToken from '../middleware/desetruckTokenMiddleware';
+import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 export default {
   async show(request: Request, response: Response) {
@@ -20,10 +20,10 @@ export default {
 
       const id = returnUserIdFromToken(authorization);
 
-      const productCategoryExits = await productCategoryRepository.findOne({ where: { name } });
+      const productCategoryExits = await productCategoryRepository.findOne({ where: [{ name, active: '1' }] });
 
       if (productCategoryExits) {
-        return response.sendStatus(400);
+        return response.status(400).json({ message: 'Já existe uma categoria com esse nome' });
       }
       const productCategory = productCategoryRepository.create({
         name,
@@ -35,7 +35,7 @@ export default {
       return response.status(201).json(productCategory);
     } catch (error) {
       console.error(error);
-      return response.sendStatus(500);
+      return response.status(500).json({ message: 'Já existe uma categoria com esse nome' });
     }
   }
 };

@@ -25,9 +25,9 @@ export default class ProductCategory {
   @JoinColumn({ name: 'user_id' })
   user:string
 
-  @OneToMany(() => ProductSubCategory, productSubCategory => productSubCategory.user, {
+  @OneToMany(() => ProductSubCategory, productSubCategory => productSubCategory.productCategory, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productSubCategorys: string[]
+  productSubCategorys: ProductSubCategory[]
 }
