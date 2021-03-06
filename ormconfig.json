@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
-  "port": 3306,
-  "username": "root",
-  "password": "pingo@708",
+  "host": "mundomoveis-do-user-8543135-0.b.db.ondigitalocean.com",
+  "port": 25060,
+  "username": "doadmin",
+  "password": "mbrbi6y5en3ck1na",
   "database": "outlet",
   "entities": [
     "./src/app/models/*.ts"
