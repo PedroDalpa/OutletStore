@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductSubCategory from '@models/ProductSubCategory';
+import ProductSubCategory from '../models/ProductSubCategory';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
-import subCategoryView from '@views/subCategoryView';
+import subCategoryView from '../views/subCategoryView';
 
 export default {
   async show(request: Request, response: Response) {

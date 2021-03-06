@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductProvider from '@models/ProductProvider';
+import ProductProvider from '../models/ProductProvider';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
-import providerView from '@views/providerView';
+import providerView from '../views/providerView';
 
 export default {
   async show(request: Request, response: Response) {

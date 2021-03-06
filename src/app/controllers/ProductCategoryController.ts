@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductCategory from '@models/ProductCategory';
+import ProductCategory from '../models/ProductCategory';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 export default {

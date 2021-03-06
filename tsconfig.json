@@ -20,20 +20,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {
-      "@controllers/*": [
-        "./src/app/controllers/*"
-      ],
-      "@models/*": [
-        "./src/app/models/*"
-      ],
-      "@views/*": [
-        "./src/app/views/*"
-      ],
-      "@config/*": [
-        "./src/app/config/*"
-      ],
-    },
+    
     "incremental": true
   },
   "include": [

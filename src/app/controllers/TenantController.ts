@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import Tenant from '@models/Tenant';
+import Tenant from '../models/Tenant';
 
 export default {
   async show(request: Request, response: Response) {

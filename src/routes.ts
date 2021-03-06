@@ -5,14 +5,14 @@ import authAccessLevelMiddleware from './app/middleware/authAccessLevelMiddlewar
 
 import UserController from './app/controllers/UserController';
 import AuthController from './app/controllers/AuthController';
-import TenantController from '@controllers/TenantController';
-import ProductBrandController from '@controllers/ProductBrandController';
-import ProductController from '@controllers/ProductController';
-import ProductProviderController from '@controllers/ProductProviderController';
-import ProductColorController from '@controllers/ProductColorController';
-import ProductPurchaseController from '@controllers/ProductPurchaseController';
-import ProductCategoryController from '@controllers/ProductCategoryController';
-import ProductSubCategoryController from '@controllers/ProductSubCategoryController';
+import TenantController from './app/controllers/TenantController';
+import ProductBrandController from './app/controllers/ProductBrandController';
+import ProductController from './app/controllers/ProductController';
+import ProductProviderController from './app/controllers/ProductProviderController';
+import ProductColorController from './app/controllers/ProductColorController';
+import ProductPurchaseController from './app/controllers/ProductPurchaseController';
+import ProductCategoryController from './app/controllers/ProductCategoryController';
+import ProductSubCategoryController from './app/controllers/ProductSubCategoryController';
 
 const routes = Router();
 

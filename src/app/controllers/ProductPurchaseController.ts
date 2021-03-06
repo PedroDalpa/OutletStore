@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductPurchase from '@models/ProductPurchase';
+import ProductPurchase from '../models/ProductPurchase';
 
 interface IProductPurchase{
   userId:string,
