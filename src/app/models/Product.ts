@@ -33,7 +33,7 @@ export default class Product {
   productBrand:string
 
   @ManyToOne(() => ProductSubCategory, productSubCategory => productSubCategory.products)
-  @JoinColumn({ name: 'product_brand_id' })
+  @JoinColumn({ name: 'product_sub_category_id' })
   productSubCategory:string
 
   @OneToMany(() => ProductProviderProduct, productProviderProduct =>

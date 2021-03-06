@@ -29,6 +29,7 @@ routes.post('/product/brand', ProductBrandController.create);
 routes.get('/product/brand', ProductBrandController.show);
 
 routes.post('/product', ProductController.create);
+routes.get('/product', ProductController.show);
 
 routes.post('/product/provider', ProductProviderController.create);
 routes.get('/product/provider', ProductProviderController.show);

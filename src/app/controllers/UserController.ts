@@ -34,4 +34,5 @@ export default {
 
     return response.status(201).json(user);
   }
+
 };

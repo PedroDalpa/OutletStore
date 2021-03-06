@@ -2,20 +2,26 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import Product from '@models/Product';
+import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 export default {
   async show(request: Request, response: Response) {
     const productRepository = getRepository(Product);
 
     const products = await productRepository.find({ where: [{ active: '1' }] });
+    console.log(products);
 
     return response.status(200).json(products);
   },
   async create(request: Request, response: Response) {
     const productRepository = getRepository(Product);
-    const { name, userId, productBrandId, productProviders } = request.body;
+    const { name, productBrandId, productProviders, productSubCategoryId } = request.body;
 
-    const productExists = await productRepository.findOne({ where: { name } });
+    const { authorization } = request.headers;
+
+    const userId = returnUserIdFromToken(authorization);
+
+    const productExists = await productRepository.findOne({ where: [{ name, active: '1' }] });
 
     if (productExists) {
       return response.sendStatus(400);
@@ -26,7 +32,8 @@ export default {
         name,
         user: userId,
         productBrand: productBrandId,
-        productProviderProducts: productProviders
+        productProviderProducts: productProviders,
+        productSubCategory: productSubCategoryId
       });
 
       await productRepository.save(product);
