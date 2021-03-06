@@ -1,7 +1,8 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn
+  CreateDateColumn, ManyToOne, JoinColumn, OneToMany
 } from 'typeorm';
+import Product from './Product';
 import ProductCategory from './ProductCategory';
 
 import User from './User';
@@ -28,4 +29,10 @@ export default class ProductSubCategory {
   @ManyToOne(() => ProductCategory, productCategory => productCategory.productSubCategorys)
   @JoinColumn({ name: 'product_category_id' })
   productCategory:ProductCategory
+
+  @OneToMany(() => Product, product => product.productBrand, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_brand_id' })
+  products: string[]
 }

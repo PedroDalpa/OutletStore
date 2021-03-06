@@ -5,6 +5,7 @@ import {
 import ProductBrand from './ProductBrand';
 import ProductProviderProduct from './ProductProviderProduct';
 import ProductPurchase from './ProductPurchase';
+import ProductSubCategory from './ProductSubCategory';
 
 import User from './User';
 
@@ -30,6 +31,10 @@ export default class Product {
   @ManyToOne(() => ProductBrand, productBrand => productBrand.products)
   @JoinColumn({ name: 'product_brand_id' })
   productBrand:string
+
+  @ManyToOne(() => ProductSubCategory, productSubCategory => productSubCategory.products)
+  @JoinColumn({ name: 'product_brand_id' })
+  productSubCategory:string
 
   @OneToMany(() => ProductProviderProduct, productProviderProduct =>
     productProviderProduct.product, {
