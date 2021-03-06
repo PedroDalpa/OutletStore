@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import ProductProvider from '@models/ProductProvider';
+import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
+import providerView from '@views/providerView';
 
 export default {
   async show(request: Request, response: Response) {
@@ -9,18 +11,22 @@ export default {
 
     const productProviders = await productProviderRepository.find({ where: [{ active: '1' }] });
 
-    return response.status(200).json(productProviders);
+    return response.status(200).json(providerView.renderMany(productProviders));
   },
   async create(request: Request, response: Response) {
     const productProviderRepository = getRepository(ProductProvider);
-    const { userId, name, phone, email } = request.body;
+    const { name, phone, email } = request.body;
+
+    const { authorization } = request.headers;
+
+    const userId = returnUserIdFromToken(authorization);
 
     const productProviderExists = await productProviderRepository.findOne({
-      where: { name }
+      where: [{ name, active: '1' }]
     });
 
     if (productProviderExists) {
-      return response.sendStatus(400);
+      return response.status(400).json({ message: 'Já existe um fornecedor com esse nome' });
     }
 
     try {

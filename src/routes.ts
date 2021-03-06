@@ -31,6 +31,7 @@ routes.get('/product/brand', ProductBrandController.show);
 routes.post('/product', ProductController.create);
 
 routes.post('/product/provider', ProductProviderController.create);
+routes.get('/product/provider', ProductProviderController.show);
 
 routes.post('/product/color', ProductColorController.create);
 
