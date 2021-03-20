@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 import ProductPurchase from '../models/ProductPurchase';
+import Purchase from '../models/Purchase';
 
 interface IProductPurchase{
   userId:string,
@@ -12,7 +14,8 @@ interface IProductPurchase{
   fiscalNoteNumber:string,
   productProvider:string,
   productColor:string,
-  product:string
+  products:ProductPurchase,
+
 }
 
 export default {
@@ -24,22 +27,20 @@ export default {
     return response.status(200).json(productPurchases);
   },
   async create(request: Request, response: Response) {
-    const productPurchaseRepository = getRepository(ProductPurchase);
+    const productPurchaseRepository = getRepository(Purchase);
     const data = request.body;
+    const { authorization } = request.headers;
+
+    const userId = returnUserIdFromToken(authorization);
     const productPurchases = [];
 
     try {
-      data.map(async (item: IProductPurchase) => {
+      data.map(async (item) => {
         const productPurchase = productPurchaseRepository.create({
-          product_size: item.productSize,
-          amount: item.amount,
+          productsPurchase: item.products,
+          fiscal_note: item.fiscalNote,
           total_value: item.totalValue,
-          unit_value: item.unitValue,
-          fiscal_note_number: item.fiscalNoteNumber,
-          user: item.userId,
-          productProvider: item.productProvider,
-          productColor: item.productColor,
-          product: item.product
+          user: userId
         });
 
         productPurchases.push(productPurchase);

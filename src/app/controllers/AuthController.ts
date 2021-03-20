@@ -8,17 +8,18 @@ export default {
   async authenticate(request: Request, response: Response) {
     const repository = getRepository(User);
     const { email, password } = request.body;
+    console.log('1s');
 
     const user = await repository.findOne({ where: { email } });
 
     if (!user) {
-      return response.sendStatus(401);
+      return response.sendStatus(400);
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return response.sendStatus(401);
+      return response.sendStatus(400);
     }
 
     const payload = {
