@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductProvider from '../models/ProductProvider';
-import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
-import providerView from '../views/providerView';
-import ProductProviderProduct from '../models/ProductProviderProduct';
-import productProviderView from '../views/productProviderView';
+import ProductProvider from '../../models/ProductProvider';
+import returnUserIdFromToken from '../../middleware/disruptTokenMiddleware';
+import providerView from '../../views/providerView';
+import ProductProviderProduct from '../../models/ProductProviderProduct';
+import productProviderView from '../../views/productProviderView';
 
 export default {
   async show(request: Request, response: Response) {

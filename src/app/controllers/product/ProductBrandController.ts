@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductBrand from '../models/ProductBrand';
+import ProductBrand from '../../models/ProductBrand';
 
-import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
+import returnUserIdFromToken from '../../middleware/disruptTokenMiddleware';
 
 export default {
   async show(request: Request, response: Response) {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductColor from '../models/ProductColor';
+import ProductColor from '../../models/ProductColor';
 
 export default {
   async show(request: Request, response: Response) {

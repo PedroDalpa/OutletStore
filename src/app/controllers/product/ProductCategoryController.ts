@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
-import ProductCategory from '../models/ProductCategory';
-import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
+import ProductCategory from '../../models/ProductCategory';
+import returnUserIdFromToken from '../../middleware/disruptTokenMiddleware';
 
 export default {
   async show(request: Request, response: Response) {
