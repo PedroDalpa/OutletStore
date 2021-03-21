@@ -4,6 +4,7 @@ import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
 import Purchase from '../models/Purchase';
 import purchaseView from '../views/purchaseView';
+import ProductInputController from './stock/ProductInputController';
 
 export default {
   async show(request: Request, response: Response) {
@@ -29,6 +30,7 @@ export default {
       });
 
       await productPurchaseRepository.save(productPurchase);
+      await ProductInputController.input(productPurchase.productsPurchase);
 
       return response.status(201).json(productPurchase);
     } catch (error) {
