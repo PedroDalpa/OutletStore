@@ -5,9 +5,9 @@ import ProductBrand from './ProductBrand';
 import Product from './Product';
 import ProductProvider from './ProductProvider';
 import ProductColor from './ProductColor';
-import ProductPurchase from './ProductPurchase';
 import ProductCategory from './ProductCategory';
 import ProductSubCategory from './ProductSubCategory';
+import Purchase from './Purchase';
 
 @Entity('user')
 export default class User {
@@ -71,11 +71,11 @@ export default class User {
   @JoinColumn({ name: 'user_id' })
   productColors: string[]
 
-  @OneToMany(() => ProductPurchase, productPurchase => productPurchase.user, {
+  @OneToMany(() => Purchase, purchase => purchase.user, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'user_id' })
-  productPurchases: string[]
+  purchases: string[]
 
   @OneToMany(() => ProductCategory, productCategory => productCategory.user, {
     cascade: ['insert', 'update']

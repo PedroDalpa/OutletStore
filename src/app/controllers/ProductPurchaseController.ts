@@ -2,29 +2,16 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 
-import ProductPurchase from '../models/ProductPurchase';
 import Purchase from '../models/Purchase';
-
-interface IProductPurchase{
-  userId:string,
-  productSize:string,
-  amount:number,
-  totalValue:number,
-  unitValue:number,
-  fiscalNoteNumber:string,
-  productProvider:string,
-  productColor:string,
-  products:ProductPurchase,
-
-}
+import purchaseView from '../views/purchaseView';
 
 export default {
   async show(request: Request, response: Response) {
-    const productPurchaseRepository = getRepository(ProductPurchase);
+    const purchaseRepository = getRepository(Purchase);
 
-    const productPurchases = await productPurchaseRepository.find({ where: [{ active: '1' }] });
+    const purchases = await purchaseRepository.find({ order: { id: 'DESC' }, where: [{ active: '1' }] });
 
-    return response.status(200).json(productPurchases);
+    return response.status(200).json(purchaseView.renderMany(purchases));
   },
   async create(request: Request, response: Response) {
     const productPurchaseRepository = getRepository(Purchase);
@@ -32,22 +19,18 @@ export default {
     const { authorization } = request.headers;
 
     const userId = returnUserIdFromToken(authorization);
-    const productPurchases = [];
 
     try {
-      data.map(async (item) => {
-        const productPurchase = productPurchaseRepository.create({
-          productsPurchase: item.products,
-          fiscal_note: item.fiscalNote,
-          total_value: item.totalValue,
-          user: userId
-        });
-
-        productPurchases.push(productPurchase);
+      const productPurchase = productPurchaseRepository.create({
+        productsPurchase: data.products,
+        fiscal_note: data.fiscalNote,
+        total_value: data.totalValue,
+        user: userId
       });
-      await productPurchaseRepository.save(productPurchases);
 
-      return response.status(201).json(productPurchases);
+      await productPurchaseRepository.save(productPurchase);
+
+      return response.status(201).json(productPurchase);
     } catch (error) {
       console.error(error);
       return response.sendStatus(500);

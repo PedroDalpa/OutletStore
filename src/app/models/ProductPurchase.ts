@@ -7,8 +7,6 @@ import Product from './Product';
 import ProductProvider from './ProductProvider';
 import Purchase from './Purchase';
 
-import User from './User';
-
 @Entity('product_purchase')
 export default class ProductPurchase {
   @PrimaryGeneratedColumn('uuid')
@@ -23,19 +21,15 @@ export default class ProductPurchase {
   @Column('float', { nullable: false })
   amount: number;
 
-  @Column('float', { nullable: false })
-  total_value: number;
+  @Column('float', { nullable: false, name: 'total_value' })
+  totalValue: number;
 
-  @Column('float', { nullable: false })
-  unit_value: number;
+  @Column('float', { nullable: false, name: 'unit_value' })
+  unitValue: number;
 
   @ManyToOne(() => ProductProvider, productProvider => productProvider.productPurchases)
   @JoinColumn({ name: 'product_provider_id' })
   productProvider:string
-
-  @ManyToOne(() => User, user => user.productPurchases)
-  @JoinColumn({ name: 'user_id' })
-  user:string
 
   @ManyToOne(() => Product, product => product.productPurchases)
   @JoinColumn({ name: 'product_id' })

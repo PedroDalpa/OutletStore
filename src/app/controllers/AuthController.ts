@@ -8,7 +8,6 @@ export default {
   async authenticate(request: Request, response: Response) {
     const repository = getRepository(User);
     const { email, password } = request.body;
-    console.log('1s');
 
     const user = await repository.findOne({ where: { email } });
 

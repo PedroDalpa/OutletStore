@@ -9,7 +9,6 @@ export default {
     const productRepository = getRepository(Product);
 
     const products = await productRepository.find({ where: [{ active: '1' }] });
-    console.log(products);
 
     return response.status(200).json(products);
   },

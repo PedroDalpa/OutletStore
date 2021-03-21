@@ -24,7 +24,7 @@ export default class Purchase {
   @Column('boolean', { nullable: false })
   active: boolean;
 
-  @ManyToOne(() => User, user => user.productProviders)
+  @ManyToOne(() => User, user => user.purchases)
   @JoinColumn({ name: 'user_id' })
   user:string
 
@@ -33,5 +33,5 @@ export default class Purchase {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'purchase_id' })
-  productsPurchase: ProductPurchase[]
+  productsPurchase: ProductPurchase[];
 }

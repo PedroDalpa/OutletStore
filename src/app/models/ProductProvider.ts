@@ -37,7 +37,7 @@ export default class ProductProvider {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'product_provider_id' })
-  productProviderProducts: string[]
+  productProviderProducts: ProductProviderProduct[]
 
   @OneToMany(() => ProductPurchase, productPurchase => productPurchase.productProvider, {
     cascade: ['insert', 'update']

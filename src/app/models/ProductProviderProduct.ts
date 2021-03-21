@@ -25,5 +25,5 @@ export default class ProductProviderProduct {
   @ManyToOne(() => ProductProvider, productProvider =>
     productProvider.productProviderProducts)
   @JoinColumn({ name: 'product_provider_id' })
-  productProvider: string;
+  productProvider: ProductProvider;
 }

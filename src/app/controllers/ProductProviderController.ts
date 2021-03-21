@@ -4,6 +4,8 @@ import { getRepository } from 'typeorm';
 import ProductProvider from '../models/ProductProvider';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 import providerView from '../views/providerView';
+import ProductProviderProduct from '../models/ProductProviderProduct';
+import productProviderView from '../views/productProviderView';
 
 export default {
   async show(request: Request, response: Response) {
@@ -12,6 +14,17 @@ export default {
     const productProviders = await productProviderRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(providerView.renderMany(productProviders));
+  },
+  async filterByProduct(request: Request, response: Response) {
+    const productProviderRepository = getRepository(ProductProviderProduct);
+    const { id } = request.params;
+
+    const productProviders = await productProviderRepository.find({
+      where: [{ product: id }],
+      relations: ['productProvider']
+    });
+
+    return response.status(200).json(productProviderView.renderMany(productProviders));
   },
   async create(request: Request, response: Response) {
     const productProviderRepository = getRepository(ProductProvider);

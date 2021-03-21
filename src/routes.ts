@@ -33,10 +33,12 @@ routes.get('/product', ProductController.show);
 
 routes.post('/product/provider', ProductProviderController.create);
 routes.get('/product/provider', ProductProviderController.show);
+routes.get('/product/:id/provider', ProductProviderController.filterByProduct);
 
 routes.post('/product/color', ProductColorController.create);
 
 routes.post('/product/purchase', ProductPurchaseController.create);
+routes.get('/product/purchase', ProductPurchaseController.show);
 
 routes.post('/product/category', ProductCategoryController.create);
 routes.get('/product/category', ProductCategoryController.show);
