@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import ProductStock from 'src/app/models/ProductStock';
+import ProductStock from '../../models/ProductStock';
 
 import { getConnection, getRepository } from 'typeorm';
 import { Request, Response } from 'express';

@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 
-import ProductOutputStock from 'src/app/models/ProductOutputStock';
+import ProductOutputStock from '../../models/ProductOutputStock';
 
-import ProductSell from 'src/app/models/ProductSell';
+import ProductSell from '../../models/ProductSell';
 import { getRepository } from 'typeorm';
 import ProductStockController from './ProductStockController';
 

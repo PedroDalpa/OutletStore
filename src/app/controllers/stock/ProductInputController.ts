@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 
-import ProductInputStock from 'src/app/models/ProductInputStock';
-import ProductPurchase from 'src/app/models/ProductPurchase';
+import ProductInputStock from '../../models/ProductInputStock';
+import ProductPurchase from '../../models/ProductPurchase';
 import { getRepository } from 'typeorm';
 import ProductStockController from './ProductStockController';
 
