@@ -5,6 +5,7 @@ import {
 import ProductBrand from './ProductBrand';
 import ProductProviderProduct from './ProductProviderProduct';
 import ProductPurchase from './ProductPurchase';
+import ProductSell from './ProductSell';
 import ProductSubCategory from './ProductSubCategory';
 
 import User from './User';
@@ -49,4 +50,11 @@ export default class Product {
   })
   @JoinColumn({ name: 'product_id' })
   productPurchases: string[]
+
+  @OneToMany(() => ProductSell, productSell =>
+    productSell.product, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_id' })
+  productSells: ProductSell[]
 }

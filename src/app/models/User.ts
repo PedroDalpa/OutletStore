@@ -8,6 +8,7 @@ import ProductColor from './ProductColor';
 import ProductCategory from './ProductCategory';
 import ProductSubCategory from './ProductSubCategory';
 import Purchase from './Purchase';
+import Sell from './Sell';
 
 @Entity('user')
 export default class User {
@@ -88,4 +89,10 @@ export default class User {
   })
   @JoinColumn({ name: 'user_id' })
   productSubCategorys: string[]
+
+  @OneToMany(() => Sell, sell => sell.user, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'user_id' })
+  sells: string[]
 }
