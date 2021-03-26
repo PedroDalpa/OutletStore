@@ -18,9 +18,9 @@ export default {
       productOutputs.push(productOutput);
       const hasStock = await ProductStockController.findInStock(item.product);
 
-      if (hasStock !== undefined) {
-        await ProductStockController.edit(item.product, ((item.amount * -1) + hasStock.amount)); // do negative to remove to stock
-      }
+      // if (hasStock !== undefined) {
+      //   await ProductStockController.edit(item.product, ((item.amount * -1) + hasStock.amount)); // do negative to remove to stock
+      // }
 
       return productOutput;
     });

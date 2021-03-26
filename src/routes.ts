@@ -15,6 +15,7 @@ import ProductCategoryController from './app/controllers/product/ProductCategory
 import ProductSubCategoryController from './app/controllers/product/ProductSubCategoryController';
 import ProductStockController from './app/controllers/stock/ProductStockController';
 import ProductSellController from './app/controllers/ProductSellController';
+import ProductInputController from './app/controllers/stock/ProductInputController';
 
 const routes = Router();
 
@@ -51,5 +52,7 @@ routes.get('/product/sub/category', ProductSubCategoryController.show);
 routes.get('/product/:id/stock', ProductStockController.index);
 
 routes.post('/product/sell', ProductSellController.create);
+
+routes.get('/product/tag/:id', ProductInputController.showTags);
 
 export default routes;

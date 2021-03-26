@@ -3,6 +3,7 @@ import {
   CreateDateColumn, ManyToOne, JoinColumn, OneToMany
 } from 'typeorm';
 import ProductBrand from './ProductBrand';
+import ProductInputStock from './ProductInputStock';
 import ProductProviderProduct from './ProductProviderProduct';
 import ProductPurchase from './ProductPurchase';
 import ProductSell from './ProductSell';
@@ -57,4 +58,11 @@ export default class Product {
   })
   @JoinColumn({ name: 'product_id' })
   productSells: ProductSell[]
+
+  @OneToMany(() => ProductInputStock, productInputStock =>
+    productInputStock.product, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_id' })
+  productInputStocks: ProductInputStock[]
 }

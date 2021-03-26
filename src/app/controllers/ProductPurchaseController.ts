@@ -10,7 +10,7 @@ export default {
   async show(request: Request, response: Response) {
     const purchaseRepository = getRepository(Purchase);
 
-    const purchases = await purchaseRepository.find({ order: { id: 'DESC' }, where: [{ active: '1' }] });
+    const purchases = await purchaseRepository.find({ order: { create_at: 'DESC' }, where: [{ active: '1' }] });
 
     return response.status(200).json(purchaseView.renderMany(purchases));
   },
