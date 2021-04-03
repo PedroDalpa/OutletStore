@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 
 import Product from '../../models/Product';
 import returnUserIdFromToken from '../../middleware/disruptTokenMiddleware';
-import ProductInputStock from 'src/app/models/ProductInputStock';
+import ProductInputStock from '../../models/ProductInputStock';
 
 export default {
   async show(request: Request, response: Response) {
