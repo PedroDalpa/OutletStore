@@ -1,8 +1,7 @@
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, ManyToOne, JoinColumn, OneToMany
+  CreateDateColumn, ManyToOne, JoinColumn
 } from 'typeorm';
-import ProductPurchase from './ProductPurchase';
 
 import User from './User';
 

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import {
   Entity, PrimaryGeneratedColumn, Column,
-  CreateDateColumn, JoinColumn, OneToOne
+  CreateDateColumn, JoinColumn, ManyToOne
 } from 'typeorm';
 
 import ProductSell from './ProductSell';
@@ -17,7 +17,7 @@ export default class ProductOutputStock {
   @Column('boolean', { nullable: false })
   active: boolean;
 
-  @OneToOne(type => ProductSell)
+  @ManyToOne(() => ProductSell, productSell => productSell.productOutput)
   @JoinColumn({ name: 'product_sell_id' })
-  productsSellId: string;
+  productSellId:string
 }

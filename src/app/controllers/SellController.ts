@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import returnUserIdFromToken from '../middleware/disruptTokenMiddleware';
 import Sell from '../models/Sell';
-
 import ProductOutputController from './stock/ProductOutputController';
 
 export default {
@@ -14,20 +13,21 @@ export default {
     return response.status(200).json(sells);
   },
   async create(request: Request, response: Response) {
-    const productSellRepository = getRepository(Sell);
+    const sellRepository = getRepository(Sell);
     const data = request.body;
     const { authorization } = request.headers;
 
     const userId = returnUserIdFromToken(authorization);
 
     try {
-      const productSell = productSellRepository.create({
+      const productSell = sellRepository.create({
         total_value: data.totalValue,
         user: userId,
         productsSell: data.products
       });
 
-      await productSellRepository.save(productSell);
+      await sellRepository.save(productSell);
+
       await ProductOutputController.output(productSell.productsSell);
 
       return response.status(201).json(productSell);

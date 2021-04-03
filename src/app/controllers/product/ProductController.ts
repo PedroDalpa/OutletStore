@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 
 import Product from '../../models/Product';
 import returnUserIdFromToken from '../../middleware/disruptTokenMiddleware';
+import ProductInputStock from 'src/app/models/ProductInputStock';
 
 export default {
   async show(request: Request, response: Response) {
@@ -11,6 +12,14 @@ export default {
     const products = await productRepository.find({ where: [{ active: '1' }] });
 
     return response.status(200).json(products);
+  },
+  async index(request: Request, response: Response) {
+    const { barCode } = request.params;
+    const productRepository = getRepository(ProductInputStock);
+
+    const { product } = await productRepository.findOneOrFail({ where: [{ product_bar_code: barCode }], relations: ['product'] });
+
+    return response.status(200).json({ productName: product.name });
   },
   async create(request: Request, response: Response) {
     const productRepository = getRepository(Product);

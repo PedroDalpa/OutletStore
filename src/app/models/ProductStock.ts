@@ -30,5 +30,5 @@ export default class ProductStock {
 
   @ManyToOne(() => ProductInputStock, productStock => productStock.productsStock)
   @JoinColumn({ name: 'product_bar_code' })
-  productInputStock:string
+  barCode:string
 }

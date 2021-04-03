@@ -15,7 +15,7 @@ export default {
       for (let index = 1; index <= item.amount; index++) {
         const productInput = productInputStockRepository.create({
           productsPurchaseId: item.id,
-          product: item.product
+          product: { id: item.product }
         });
         productInputs.push(productInput);
       }
@@ -27,7 +27,6 @@ export default {
     } catch (error) {
       console.error(error);
     }
-    console.log(productInputs);
 
     return productInputs;
   },

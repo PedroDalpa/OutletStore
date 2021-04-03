@@ -9,14 +9,14 @@ import ProductInputStock from 'src/app/models/ProductInputStock';
 const ProductStockController = {
   async index(request: Request, response: Response) {
     const { id } = request.params;
-
-    const productStock = ProductStockController.findInStock(id);
+    const productStockRepository = getRepository(ProductStock);
+    const productStock = await productStockRepository.findOne({ where: [{ active: '1', id: id }] });
 
     return response.status(200).json(productStock);
   },
-  async findInStock(productId:string) {
+  async findInStock(barCode:string) {
     const productStockRepository = getRepository(ProductStock);
-    const productStock = await productStockRepository.findOne({ where: [{ active: '1', productsId: productId }] });
+    const productStock = await productStockRepository.findOne({ where: [{ active: '1', productInputStock: barCode }] });
     return productStock;
   },
   async create(productsInputStock:ProductInputStock[]) {
@@ -24,8 +24,8 @@ const ProductStockController = {
     const productsStock = [];
     productsInputStock.map(item => {
       const productStock = productStockRepository.create({
-        productsId: item.product,
-        productInputStock: item.product_bar_code
+        productsId: item.product.id,
+        barCode: item.product_bar_code
       });
 
       productsStock.push(productStock);
@@ -39,15 +39,18 @@ const ProductStockController = {
     }
     return productsStock;
   },
-  async edit(productId:string, amount:number) {
-    // const productStock = await getConnection()
-    //   .createQueryBuilder()
-    //   .update(ProductStock)
-    //   .set({ amount: amount })
-    //   .where('product_id = :productId', { productId })
-    //   .execute();
-
-    // return productStock;
+  async edit(productBarCode:string) {
+    try {
+      const productStock = await getConnection()
+        .createQueryBuilder()
+        .update(ProductStock)
+        .set({ is_stock: false })
+        .where('barCode = :productBarCode', { productBarCode })
+        .execute();
+      return productStock;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 };

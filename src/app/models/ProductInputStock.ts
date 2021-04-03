@@ -8,6 +8,7 @@ import ProductPurchase from './ProductPurchase';
 import crypto from 'crypto';
 import Product from './Product';
 import ProductStock from './ProductStock';
+import ProductSell from './ProductSell';
 
 @Entity('product_input_stock')
 export default class ProductInputStock {
@@ -25,7 +26,7 @@ export default class ProductInputStock {
 
   @BeforeInsert()
   beforeInsertActions() {
-    this.product_bar_code = crypto.randomBytes(6).toString('hex');
+    this.product_bar_code = crypto.randomBytes(3).toString('hex');
   }
 
   @OneToOne(type => ProductPurchase)
@@ -34,11 +35,17 @@ export default class ProductInputStock {
 
   @ManyToOne(() => Product, product => product.productInputStocks)
   @JoinColumn({ name: 'product_id' })
-  product:string
+  product:Product
 
-  @OneToMany(() => ProductStock, productStock => productStock.productInputStock, {
+  @OneToMany(() => ProductStock, productStock => productStock.barCode, {
     cascade: ['insert', 'update']
   })
   @JoinColumn({ name: 'product_bar_code' })
   productsStock: string[]
+
+  @OneToMany(() => ProductSell, productSell => productSell.barCode, {
+    cascade: ['insert', 'update']
+  })
+  @JoinColumn({ name: 'product_bar_code' })
+  productsSell: string[]
 }
